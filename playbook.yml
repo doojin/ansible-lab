@@ -1,0 +1,46 @@
+---
+
+- name: Set up docker
+  hosts: all
+  roles:
+    - geerlingguy.docker
+  tasks:
+    - name: Getting OS distribution and version
+      debug: msg="{{ ansible_distribution }} {{ ansible_distribution_version }}"
+    
+    - name: Login into Docker hub
+      docker_login:
+        username: dmi3papka
+        password: "{{ docker_pat }}"
+
+- name: Deploy app
+  hosts: app
+  tasks:
+    - name: Run application container
+      docker_container:
+        name: simple-app
+        image: dmi3papka/simple-app
+        ports:
+          - "80:80"
+
+- name: Deploy load balancer
+  hosts: load_balancer
+  vars:
+    nginx_config_path: /tmp/default.conf
+  tasks:
+    - name: Prepare nginx config
+      template:
+        src: templates/nginx.conf.j2
+        dest: "{{ nginx_config_path }}"
+    
+    - name: Run nginx
+      docker_container:
+        name: nginx
+        image: nginx
+        ports:
+          - "80:80"
+        mounts:
+          - type: bind
+            source: "{{ nginx_config_path }}"
+            target: /etc/nginx/conf.d/default.conf
+
