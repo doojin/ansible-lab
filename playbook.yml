@@ -17,27 +17,5 @@
 
 - name: Deploy load balancer
   hosts: load_balancer
-  vars:
-    nginx_config_path: /usr/src/default.conf
-  tasks:
-    - name: Prepare nginx config
-      template:
-        src: templates/nginx.conf.j2
-        dest: "{{ nginx_config_path }}"
-    
-    - name: Run nginx
-      docker_container:
-        name: nginx
-        image: nginx:1.27.5
-        ports:
-          - "80:80"
-        mounts:
-          - type: bind
-            source: "{{ nginx_config_path }}"
-            target: /etc/nginx/conf.d/default.conf
-        restart_policy: always
-        healthcheck:
-          test: ["CMD", "curl", "--fail", "http://127.0.0.1/ping"]
-          interval: 1m30s
-          timeout: 5s
-          retries: 3
+  roles:
+    - load-balancer-deployment
