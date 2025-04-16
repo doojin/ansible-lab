@@ -27,7 +27,7 @@
 - name: Deploy load balancer
   hosts: load_balancer
   vars:
-    nginx_config_path: /usr/app/default.conf
+    nginx_config_path: /usr/src/default.conf
   tasks:
     - name: Prepare nginx config
       template:
