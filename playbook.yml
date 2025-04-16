@@ -24,7 +24,7 @@
           - "80:80"
         restart_policy: always
         healthcheck:
-          test: ["CMD", "curl", "--fail", "http://127.0.0.1/not-existing-url"]
+          test: ["CMD", "curl", "--fail", "http://127.0.0.1/ping"]
           interval: 1m30s
           timeout: 5s
           retries: 3
