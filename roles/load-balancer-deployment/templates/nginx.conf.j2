@@ -1,6 +1,6 @@
 upstream app {
     {% for host in groups['app'] %}
-    server {{ host }};
+    server {{ host }}:{{ app_port | default(80) }};
     {% endfor %}
 }
 
