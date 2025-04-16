@@ -15,7 +15,7 @@ server {
     # Healthcheck endpoint
     location /ping {
         access_log off;
-        add_header 'Content-Type', 'application/json';
+        add_header 'Content-Type' 'application/json';
         return 200 '{ "ok": true }';
     }
 }
