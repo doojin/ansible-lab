@@ -19,7 +19,7 @@
     - name: Run application container
       docker_container:
         name: simple-app
-        image: dmi3papka/simple-app
+        image: dmi3papka/simple-app:1.0.1
         ports:
           - "80:80"
         restart_policy: always
@@ -37,7 +37,7 @@
     - name: Run nginx
       docker_container:
         name: nginx
-        image: nginx
+        image: nginx:1.27.5
         ports:
           - "80:80"
         mounts:
