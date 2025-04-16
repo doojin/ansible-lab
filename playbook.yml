@@ -5,29 +5,15 @@
   roles:
     - geerlingguy.docker
   tasks:
-    - name: Getting OS distribution and version
-      debug: msg="{{ ansible_distribution }} {{ ansible_distribution_version }}"
-    
     - name: Login into Docker hub
       docker_login:
         username: dmi3papka
         password: "{{ docker_pat }}"
 
 - name: Deploy app
-  hosts: app
-  tasks:
-    - name: Run application container
-      docker_container:
-        name: simple-app
-        image: dmi3papka/simple-app:1.0.2
-        ports:
-          - "80:80"
-        restart_policy: always
-        healthcheck:
-          test: ["CMD", "curl", "--fail", "http://127.0.0.1/ping"]
-          interval: 1m30s
-          timeout: 5s
-          retries: 3
+  hosts: app 
+  roles:
+    - app-deployment
 
 - name: Deploy load balancer
   hosts: load_balancer
