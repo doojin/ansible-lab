@@ -29,7 +29,7 @@ A dedicated VPS instance runs an NGINX load balancer that distributes traffic ac
 
 This lab also includes two automated workflows implemented using GitHub Actions:
 
-1. **Provisioning Workflow**.
+1. **Provisioning Workflow**
 
     This workflow accepts a list of IP addresses for newly created VPS instances and performs the initial provisioning. It:
 
