@@ -9,6 +9,7 @@
       docker_login:
         username: dmi3papka
         password: "{{ docker_pat }}"
+  become: yes
 
 - name: Deploy app
   hosts: app
