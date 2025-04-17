@@ -1,15 +1,17 @@
 ---
 
-- name: Set up docker
+- name: Set up Docker
   hosts: all
   roles:
     - geerlingguy.docker
+  become: yes
+
+- name: Docker login
   tasks:
     - name: Login into Docker hub
       docker_login:
         username: dmi3papka
         password: "{{ docker_pat }}"
-  become: yes
 
 - name: Deploy app
   hosts: app
