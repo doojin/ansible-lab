@@ -7,7 +7,7 @@ on:
         required: true
 
 jobs:
-  deploy:
+  bootstrap:
     runs-on: ubuntu-latest
 
     steps:
