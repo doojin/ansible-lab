@@ -7,6 +7,7 @@
   become: yes
 
 - name: Docker login
+  hosts: all
   tasks:
     - name: Login into Docker hub
       docker_login:
