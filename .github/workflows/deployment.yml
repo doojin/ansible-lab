@@ -54,3 +54,9 @@ jobs:
           requirements: requirements.yml
           options: |
             --inventory /tmp/inventory.yml
+
+      - name: Clean up
+        if: always()
+        run: |
+          rm -f /tmp/inventory.yml
+          rm -f /tmp/ansible_private_key

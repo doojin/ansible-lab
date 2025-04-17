@@ -51,3 +51,10 @@ jobs:
           vault_password: "${{ secrets.ANSIBLE_VAULT_PASSWORD }}"
           options: |
             --inventory /tmp/inventory.yml
+
+      - name: Clean up
+        if: always()
+        run: |
+          rm -f /tmp/inventory.yml
+          rm -f /tmp/ansible_private_key
+          rm -f /tmp/ansible_public_key
