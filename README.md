@@ -5,7 +5,7 @@ ansible-galaxy role install geerlingguy.docker
 
 To create Ansible user on my bare metal VPS instances:
 ```
-ansible-playbook -i inventories/bootstrap.yml bootstrap.yml
+ansible-playbook -i inventories/bootstrap.yml bootstrap.yml --vault-password-file=<vault_password_file>
 ```
 
 To run Ansible playbook:
