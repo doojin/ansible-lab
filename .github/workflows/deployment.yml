@@ -18,7 +18,7 @@ jobs:
 
       - name: Create inventory file
         run: |
-          cat << EOF > /tmp/inventory.yml
+          cat << EOF >> /tmp/inventory.yml
           all:
             vars:
               ansible_user: ansible
@@ -33,7 +33,7 @@ jobs:
             echo "  $host" >> inventory.yml
           done
 
-          cat << EOF > /tmp/inventory.yml
+          cat << EOF >> /tmp/inventory.yml
           load_balancer:
             hosts:
               92.246.130.55:
