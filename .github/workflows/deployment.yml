@@ -31,7 +31,7 @@ jobs:
           IFS=',' read -ra APP_HOSTS <<< "${{ inputs.app_hosts }}"
           for host in "${APP_HOSTS[@]}"; do
             cat << EOF >> /tmp/inventory.yml
-            $host:
+              $host:
           EOF
           done
 
