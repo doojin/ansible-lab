@@ -1,4 +1,9 @@
 ---
+- name: Create Docker group
+  ansible.builtin.group:
+    name: docker
+    state: present
+
 - name: Create Ansible user
   ansible.builtin.user:
     name: ansible
