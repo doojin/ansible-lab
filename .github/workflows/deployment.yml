@@ -20,17 +20,17 @@ jobs:
         run: |
           IFS=',' read -ra APP_HOSTS <<< "${{ inputs.app_hosts }}"
           cat <<EOF >> /tmp/inventory.yml
-            all:
-              vars:
-                ansible_user: ansible
-                ansible_ssh_private_key_file: /tmp/ansible_private_key
-                ansible_python_interpreter: /usr/bin/python3
-            app:
-              hosts:
+          all:
+            vars:
+              ansible_user: ansible
+              ansible_ssh_private_key_file: /tmp/ansible_private_key
+              ansible_python_interpreter: /usr/bin/python3
+          app:
+            hosts:
           EOF
 
           for host in "${APP_HOSTS[@]}"; do
-            echo "      $host:" >> /tmp/inventory.yml
+            echo "    $host:" >> /tmp/inventory.yml
           done
 
           cat <<EOF >> /tmp/inventory.yml
