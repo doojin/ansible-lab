@@ -29,10 +29,8 @@ jobs:
           EOF
 
           IFS=',' read -ra APP_HOSTS <<< "${{ inputs.app_hosts }}"
-          echo "${APP_HOSTS[@]}"
-          echo "${{ inputs.app_hosts }}"
           for host in "${APP_HOSTS[@]}"; do
-            echo "  $host" >> inventory.yml
+            echo "  $host" >> /tmp/inventory.yml
           done
 
           cat << EOF >> /tmp/inventory.yml
