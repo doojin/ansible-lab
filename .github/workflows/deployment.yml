@@ -41,3 +41,11 @@ jobs:
 
       - name: Print inventory file
         run: cat /tmp/inventory.yml
+
+      - name: Run playbook
+        uses: dawidd6/action-ansible-playbook@v3
+        with:
+          playbook: main.yml
+          vault_password: "${{ secrets.ANSIBLE_VAULT_PASSWORD }}"
+          options: |
+            --inventory /tmp/inventory.yml
