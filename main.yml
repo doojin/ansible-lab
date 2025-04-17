@@ -11,7 +11,7 @@
         password: "{{ docker_pat }}"
 
 - name: Deploy app
-  hosts: app 
+  hosts: app
   roles:
     - app-deployment
 
