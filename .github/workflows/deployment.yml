@@ -39,8 +39,11 @@ jobs:
                 ${{ inputs.load_balancer_host }}:
           EOF
 
-      - name: Print inventory file
-        run: cat /tmp/inventory.yml
+      - name: Generate Ansible private key
+        run: |
+          cat <<EOF >> /tmp/ansible_private_key
+            ${{ secrets.ANSIBLE_PRIVATE_KEY }}
+          EOF
 
       - name: Run playbook
         uses: dawidd6/action-ansible-playbook@v3
