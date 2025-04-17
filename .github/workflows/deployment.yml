@@ -32,7 +32,7 @@ jobs:
           for host in "${APP_HOSTS[@]}"; do
             cat << EOF >> /tmp/inventory.yml
             $host:
-            EOF
+          EOF
           done
 
           cat << EOF >> /tmp/inventory.yml
