@@ -1,4 +1,4 @@
-name: Bootstrap servers
+name: Bootstrap Servers
 
 on:
   workflow_dispatch:
@@ -41,5 +41,6 @@ jobs:
         uses: dawidd6/action-ansible-playbook@v3
         with:
           playbook: bootstrap.yml
+          vault_password: "${{ secrets.ANSIBLE_VAULT_PASSWORD }}"
           options: |
             --inventory /tmp/inventory.yml
