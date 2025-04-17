@@ -18,15 +18,20 @@ jobs:
 
       - name: Create inventory file
         run: |
-          APP_HOSTS=""
-          IFS=',' read -ra APP_HOSTS_LIST <<< "${{ inputs.app_hosts }}"
-          for host in "${APP_HOSTS_LIST[@]}"; do
-            APP_HOSTS+=$(printf "    %s:\n" "$host")
+          IFS=',' read -ra APP_HOSTS <<< "${{ inputs.app_hosts }}"
+          cat <<EOF > /tmp/inventory.yml
+            all:
+              vars:
+                ansible_user: ansible
+                ansible_ssh_private_key_file: /tmp/ansible_private_key
+                ansible_python_interpreter: /usr/bin/python3
+            app:
+              hosts:
+          EOF
+
+          for host in "${APP_HOSTS[@]}"; do
+            echo "    $host:" >> /tmp/inventory.yml
           done
-
-          export APP_HOSTS
-
-          envsubst < main-inventory.tpl > /tmp/inventory.yml
 
       - name: Print inventory file
         run: cat /tmp/inventory.yml
