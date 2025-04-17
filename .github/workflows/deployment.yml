@@ -24,7 +24,7 @@ jobs:
             APP_HOSTS_BLOCK+="    $host:\n"
           done
 
-          sed -e "s|{{APP_HOSTS}}|$(printf "$APP_HOSTS_BLOCK")|" main-inventory.tpl > /tmp/inventory.yml
+          sed "s|{{APP_HOSTS}}|$(printf "$APP_HOSTS_BLOCK")|" main-inventory.tpl > /tmp/inventory.yml
 
       - name: Print inventory file
         run: cat /tmp/inventory.yml
