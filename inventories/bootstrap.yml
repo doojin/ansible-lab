@@ -1,0 +1,8 @@
+all:
+  hosts:
+    92.246.130.47:
+    92.246.130.68:
+    92.246.130.55:
+  vars:
+    ansible_user: root
+    ansible_ssh_private_key_file: ~/.ssh/id_ed25519
