@@ -47,5 +47,6 @@ jobs:
         with:
           playbook: main.yml
           vault_password: "${{ secrets.ANSIBLE_VAULT_PASSWORD }}"
+          requirements: requirements.yml
           options: |
             --inventory /tmp/inventory.yml
