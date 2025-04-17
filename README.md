@@ -10,5 +10,5 @@ ansible-playbook -i inventories/bootstrap.yml bootstrap.yml
 
 To run Ansible playbook:
 ```
-ansible-playbook -i inventories/main.yml --extra-vars="@secrets.yml" playbook.yml --vault-password-file=<vault_password_file>
+ansible-playbook -i inventories/main.yml playbook.yml --vault-password-file=<vault_password_file>
 ```
