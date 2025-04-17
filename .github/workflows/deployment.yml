@@ -21,7 +21,7 @@ jobs:
           APP_HOSTS=""
           IFS=',' read -ra APP_HOSTS_LIST <<< "${{ inputs.app_hosts }}"
           for host in "${APP_HOSTS_LIST[@]}"; do
-            APP_HOSTS+="    $host:\n"
+            APP_HOSTS+=$(printf "    %s:\n" "$host")
           done
 
           export APP_HOSTS
