@@ -18,9 +18,9 @@ Multiple VPS instances are used to run a simple Node.js application. These appli
 
 4. **Reverse Proxy for Application**.
 Each Node.js instance includes a reverse proxy (NGINX) listening on port `80`. This proxy:
-- Forwards traffic to the local Node.js container
-- Is configured to only accept requests from the load balancer's IP
-- Rejects all other incoming traffic automatically
+    - Forwards traffic to the local Node.js container
+    - Is configured to only accept requests from the load balancer's IP
+    - Rejects all other incoming traffic automatically
 
 5. **Centralized Load Balancer**.
 A dedicated VPS instance runs an NGINX load balancer that distributes traffic across all Node.js application instances.
