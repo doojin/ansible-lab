@@ -1,0 +1,27 @@
+name: Deployment
+
+on:
+  workflow_dispatch:
+    inputs:
+      app_hosts:
+        required: true
+      load_balancer_host:
+        required: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Create inventory file
+        run: |
+          cat << EOF > /tmp/inventory.yml
+          a: b
+          c: d
+          EOF
+
+      - name: Print inventory file
+        run: cat /tmp/inventory.yml
