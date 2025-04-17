@@ -1,6 +1,7 @@
 ---
 - name: Prepare nginx config
   template:
+    become: true
     src: templates/nginx.conf.j2
     dest: "{{ nginx_config_path }}"
 
