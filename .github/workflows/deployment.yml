@@ -38,7 +38,7 @@ jobs:
           cat << EOF >> /tmp/inventory.yml
           load_balancer:
             hosts:
-              ${{ inputs.app_hosts }}:
+              ${{ inputs.load_balancer_host }}:
           EOF
 
       - name: Print inventory file
