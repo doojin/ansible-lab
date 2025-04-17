@@ -1,0 +1,45 @@
+name: Bootstrap servers
+
+on:
+  workflow_dispatch:
+    inputs:
+      hosts:
+        required: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Create inventory file
+        run: |
+          IFS=',' read -ra HOSTS <<< "${{ inputs.hosts }}"
+          cat <<EOF >> /tmp/inventory.yml
+          all:
+            vars:
+              ansible_user: root
+              ansible_ssh_private_key_file: /tmp/ansible_private_key
+              ansible_python_interpreter: /usr/bin/python3
+            hosts:
+          EOF
+
+          for host in "${HOSTS[@]}"; do
+            echo "    $host:" >> /tmp/inventory.yml
+          done
+
+      - name: Generate Ansible private key
+        run: |
+          cat <<EOF >> /tmp/ansible_private_key
+          ${{ secrets.SSH_KEY }}
+          EOF
+          chmod 400 /tmp/ansible_private_key
+
+      - name: Run playbook
+        uses: dawidd6/action-ansible-playbook@v3
+        with:
+          playbook: bootstrap.yml
+          options: |
+            --inventory /tmp/inventory.yml
