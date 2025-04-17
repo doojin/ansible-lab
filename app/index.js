@@ -9,8 +9,7 @@ app.get('/', (req, res) => {
     res.json({ instanceId });
 });
 
-// Healthcheck endpoint
-app.get('/ping', (req, res) => {
+app.get('/health', (req, res) => {
     res.json({ ok: true });
 });
 
