@@ -1,0 +1,22 @@
+---
+- name: Create Ansible user
+  ansible.builtin.user:
+    name: ansible
+    groups: sudo,docker
+    append: yes
+
+- name: Create ~/.ssh directory for Ansible user
+  file:
+    path: /home/ansible/.ssh
+    state: directory
+    owner: ansible
+    group: ansible
+    mode: 0700
+
+- name: Add public key to authorized keys
+  copy:
+    src: ~/.ssh/ansible_lab.pub
+    dest: /home/ansible/.ssh/authorized_keys
+    owner: ansible
+    group: ansible
+    mode: 0600

@@ -1,0 +1,6 @@
+---
+
+- name: Create Ansible user
+  hosts: all
+  roles:
+    - bootstrap
