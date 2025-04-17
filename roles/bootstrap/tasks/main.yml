@@ -20,7 +20,7 @@
 
 - name: Add public key to authorized keys
   copy:
-    src: ~/.ssh/ansible_lab.pub
+    src: /tmp/ansible_public_key
     dest: /home/ansible/.ssh/authorized_keys
     owner: ansible
     group: ansible
