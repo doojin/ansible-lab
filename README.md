@@ -24,3 +24,27 @@ Each Node.js instance includes a reverse proxy (NGINX) listening on port `80`. T
 
 5. **Centralized Load Balancer**.
 A dedicated VPS instance runs an NGINX load balancer that distributes traffic across all Node.js application instances.
+
+# CI/CD Automation with GitHub Actions
+
+This lab also includes two automated workflows implemented using GitHub Actions:
+
+1. **Provisioning Workflow**.
+
+    This workflow accepts a list of IP addresses for newly created VPS instances and performs the initial provisioning. It:
+
+    - Creates an Ansible user on each VPS
+
+    - Sets up SSH key authentication
+
+    - Prepares the instances for further configuration
+
+2. **Deployment Workflow**
+
+    This workflow installs Docker on all VPS instances, dynamically generates the Ansible inventory file based on provided IPs, and runs the necessary Docker containers:
+
+    - Node.js application instances on designated VPS hosts
+
+    - Reverse proxies configured to only allow traffic from the load balancer
+
+    - A centralized load balancer to distribute traffic across application nodes
