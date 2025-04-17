@@ -18,11 +18,13 @@ jobs:
 
       - name: Create inventory file
         run: |
-          APP_HOSTS_BLOCK=""
-          IFS=',' read -ra APP_HOSTS <<< "${{ inputs.app_hosts }}"
-          for host in "${APP_HOSTS[@]}"; do
-            APP_HOSTS_BLOCK+="    $host:\n"
+          APP_HOSTS=""
+          IFS=',' read -ra APP_HOSTS_LIST <<< "${{ inputs.app_hosts }}"
+          for host in "${APP_HOSTS_LIST[@]}"; do
+            APP_HOSTS="    $host:\n"
           done
+
+          export APP_HOSTS
 
           envsubst < main-inventory.tpl > /tmp/inventory.yml
 
