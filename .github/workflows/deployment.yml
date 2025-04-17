@@ -44,6 +44,7 @@ jobs:
           cat <<EOF >> /tmp/ansible_private_key
             ${{ secrets.ANSIBLE_PRIVATE_KEY }}
           EOF
+          chmod 400 /tmp/ansible_private_key
 
       - name: Run playbook
         uses: dawidd6/action-ansible-playbook@v3
