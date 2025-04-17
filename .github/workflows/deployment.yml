@@ -34,9 +34,9 @@ jobs:
           done
 
           cat <<EOF >> /tmp/inventory.yml
-            load_balancer:
-              hosts:
-                ${{ inputs.load_balancer_host }}:
+          load_balancer:
+            hosts:
+              ${{ inputs.load_balancer_host }}:
           EOF
 
       - name: Generate Ansible private key
