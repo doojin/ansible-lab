@@ -2,7 +2,7 @@ ARG NODE_VERSION=22
 
 FROM node:${NODE_VERSION}-alpine
 
-ENV NODE_EVN=production
+ENV NODE_ENV=production
 ENV PORT=80
 
 WORKDIR /usr/src/app
