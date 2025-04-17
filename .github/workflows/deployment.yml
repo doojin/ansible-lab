@@ -33,8 +33,10 @@ jobs:
             echo "      $host:" >> /tmp/inventory.yml
           done
 
-          cat <<EOF > /tmp/inventory.yml
-            load_balancer: ${{ inputs.load_balancer_host }}
+          cat <<EOF >> /tmp/inventory.yml
+            load_balancer:
+              hosts:
+                ${{ inputs.load_balancer_host }}
           EOF
 
       - name: Print inventory file
