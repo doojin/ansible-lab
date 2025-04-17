@@ -19,7 +19,7 @@ jobs:
       - name: Create inventory file
         run: |
           IFS=',' read -ra APP_HOSTS <<< "${{ inputs.app_hosts }}"
-          cat <<EOF > /tmp/inventory.yml
+          cat <<EOF >> /tmp/inventory.yml
             all:
               vars:
                 ansible_user: ansible
@@ -30,8 +30,12 @@ jobs:
           EOF
 
           for host in "${APP_HOSTS[@]}"; do
-            echo "    $host:" >> /tmp/inventory.yml
+            echo "      $host:" >> /tmp/inventory.yml
           done
+
+          cat <<EOF > /tmp/inventory.yml
+            load_balancer: ${{ inputs.load_balancer_host }}
+          EOF
 
       - name: Print inventory file
         run: cat /tmp/inventory.yml
