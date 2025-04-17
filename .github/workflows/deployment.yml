@@ -42,7 +42,7 @@ jobs:
       - name: Generate Ansible private key
         run: |
           cat <<EOF >> /tmp/ansible_private_key
-            ${{ secrets.ANSIBLE_PRIVATE_KEY }}
+          ${{ secrets.ANSIBLE_PRIVATE_KEY }}
           EOF
           chmod 400 /tmp/ansible_private_key
 
