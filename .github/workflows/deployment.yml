@@ -18,28 +18,14 @@ jobs:
 
       - name: Create inventory file
         run: |
-          cat << EOF >> /tmp/inventory.yml
-          all:
-            vars:
-              ansible_user: ansible
-              ansible_ssh_private_key_file: /tmp/ansible_private_key
-              ansible_python_interpreter: /usr/bin/python3
-          app:
-            hosts:
-          EOF
-
+          APP_HOSTS_BLOCK=""
           IFS=',' read -ra APP_HOSTS <<< "${{ inputs.app_hosts }}"
           for host in "${APP_HOSTS[@]}"; do
-            cat << EOF >> /tmp/inventory.yml
-              $host:
-          EOF
+            APP_HOSTS_BLOCK+="    $host:\n"
           done
 
-          cat << EOF >> /tmp/inventory.yml
-          load_balancer:
-            hosts:
-              ${{ inputs.load_balancer_host }}:
-          EOF
+          sed -e "s|{{APP_HOSTS}}|$(printf "$APP_HOSTS_BLOCK")|" \
+            main-inventory.tpl > /tmp/inventory.yml
 
       - name: Print inventory file
         run: cat /tmp/inventory.yml
